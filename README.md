@@ -14,6 +14,7 @@ I created a form that accomplishes several things:
   2. Clears out & stores the data submitted
   3. Adds salaries to calculate the monthly expense
   4. Removes employee from the DOM
+
 ###To do:
   - Keeps salary in the total
 
