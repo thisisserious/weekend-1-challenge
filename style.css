@@ -1,0 +1,30 @@
+body {
+  font-family: Verdana, Arial, sans-serif;
+}
+
+th {
+  border: solid darkgray;
+  border-radius: 5px;
+  padding: 1px;
+}
+
+td {
+  padding: 10px;
+}
+
+input {
+  display: inline;
+  border-radius: 5px;
+}
+
+.labels {
+  width: 8%;
+  margin-left: 20px;
+}
+
+#submit {
+  background-color: darkgray;
+  color: black;
+  margin-left: 20px;
+  border-radius: 5px;
+}
