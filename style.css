@@ -31,7 +31,7 @@ input {
   margin: 15px 0 15px 0;
 }
 
-button, #remove {
+button {
   background-color: darkgray;
   color: black;
   border-radius: 5px;
