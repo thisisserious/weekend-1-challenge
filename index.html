@@ -26,24 +26,21 @@
 
       <button type="submit" id="submit">Submit</button>
     </form>
-    <div id="employeeData">
+
       <h2>Employees</h2>
-      <table>
+      <table id="employeeData">
         <thead>
           <tr>
             <th>Name</th>
             <th>Employee ID</th>
             <th>Job Title</th>
-            <th class="pay">Annual Salary</th>
+            <th>Annual Salary</th>
+            <th id="remove">Remove</th>
           </tr>
         </thead>
           <tbody></tbody>
-          <tfoot>
-            <tr>
-              <td>Total Monthly Expenditure: $<span id="monthlyTotal"></span></td>
-            </tr>
-          </tfoot>
       </table>
-    </div>
+
+      <p>Total Monthly Expenditures: $<span id="monthlySalary">0</span></p>
   </body>
 </html>

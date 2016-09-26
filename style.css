@@ -2,29 +2,41 @@ body {
   font-family: Verdana, Arial, sans-serif;
 }
 
-th {
-  border: solid darkgray;
+table, th, td {
+  border: 1px solid darkgray;
   border-radius: 5px;
   padding: 1px;
 }
 
-td {
-  padding: 10px;
+table {
+  border-collapse: collapse;
 }
 
+th, td {
+  padding: 15px;
+}
+
+th {
+  background-color: #E1F5FE;
+}
 input {
-  display: inline;
+  display: block;
   border-radius: 5px;
+  margin: -15px 0 auto 0;
 }
 
 .labels {
   width: 8%;
-  margin-left: 20px;
+  display: block;
+  margin: 15px 0 15px 0;
+}
+
+button, #remove {
+  background-color: darkgray;
+  color: black;
+  border-radius: 5px;
 }
 
 #submit {
-  background-color: darkgray;
-  color: black;
-  margin-left: 20px;
-  border-radius: 5px;
+  margin-top: 15px;
 }

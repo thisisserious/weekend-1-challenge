@@ -1,77 +1,91 @@
 $(document).ready(function () {
-  console.log('This works!');
-  $('#employeeInfo').on('submit', function (event) {
-    event.preventDefault();
+  console.log('This works!');//test to make sure all is well, linked correctly, etc.
 
-    var employee = {};
+  var totalMonthlySalary = 0; //keeps track of the total; scope that's local
+  // to that anonymous function(the document ready function, global var for that
+  // function; keeps it outside everything so everything has access)
 
-    var fields = $('#employeeInfo').serializeArray();
-    console.log('fields', fields);
+  $('#employeeInfo').on('submit', function (event) { //event listener for submit
+    event.preventDefault(); //prevents inputs from populating url
 
-    fields.forEach(function (element, index) {
-      employee[element.name] = element.value;
+    var employee = {}; //empty object to populate with inputs
+
+    var fields = $('#employeeInfo').serializeArray(); //call to form inputs to
+    //populate an array
+    console.log('fields', fields); //test to make sure fields is being populated
+
+    fields.forEach(function (element, index) { //taking the element & index from
+      //the fields array & populating the employee object
+      employee[element.name] = element.value; //applying name & value within
+      //employee object
     });
 
-    // console.log('salary', salary);
+    $('#employeeData').on('click', 'button', removeEmployee);//event listener for
+    //removing an employee on the button click
 
-    // var salaries = +$('input[name=annualSalary]').val();
-    // var calculator = function (total) {
-    //   total += salaries;
-    //   return total;
-    // };
-    //
-    // calculator(salaries);
-    // console.log('salaries', salaries);
-
-    //var salaries pulls the value from the input annualSalary
-    //prints salaries to show it's working
-
-    var salaries = $('input[name=annualSalary]').val();
-    console.log('salaries', salaries);
-
+    //clear form data
     $('#employeeInfo').find('input[type=text]').val('');
     $('#employeeInfo').find('input[type=number]').val('');
 
+    totalMonthlySalary = totalMonthlySalary + employee.annualSalary / 12;//updates
+    //totalMonthlySalary to take the input & divide by 12 & make that the new total
+
+    updateMonthlySalaryDisplay();//function call
+
+    //appending to the DOM
     appendDom(employee);
 
-    // var calculate = {};
-    //
-    // var salaries = $('#annualSalary').serializeArray();
-    // console.log('salaries', salaries);
-    //
-    // salaries.forEach(function (element, index) {
-    //   calculate[element.name] = element.value;
-    // });
-    console.log('employee object', employee);
+    function updateMonthlySalaryDisplay() {//accesses the span id & changes the text
+      //to totalMonthlySalary rounded to the nearest 2 decimals
+      $('#monthlySalary').text(totalMonthlySalary.toFixed(2));
+    }
 
-    // var salary = +$('#annualSalary').val();
-    // console.log('salary', salary);
+    //myNumber.toLocaleString('en-US', { currency : 'USD', style : 'currency' });
+    //^^not supported on a lot of mobile browsers
 
-    $('#monthlyTotal').text(Math.round(salaries / 12));
+    console.log('employee object', employee);//test to see the populated employee object
 
-    // function calculate() {
-    //   var sum = 0;
-    //   ('#monthlyTotal').each(function () {
-    //     var value = $('#monthlyTotal').text(Math.round(salaries / 12));
-    //     if (!isNaN(value) && value.length != 0) {
-    //       sum += parseFloat(value);
-    //     }
-    //   });
-    //   $('#pay').text(sum);
-    // };
+    // var salary = +$('#annualSalary').val(); <--a neat trick to take a string,
+    // convert it to a number, & return the value into a new var
+    // console.log('salary', salary); <--the test to make sure that^ works
 
   });
 
   function appendDom(data) {
-    var $data = $('<div class="employee"></div>');
+    var $data = $('<tr class="employee"></tr>');
 
-    $data.append('<tr>' + '<td>' + data.firstName + ' ' + data.lastName
+    //add our employee data
+    $data.append('<td>' + data.firstName + ' ' + data.lastName
     + '</td>' + '<td>' + data.idNum + '</td>' + '<td>' + data.jobTitle + '</td>'
-    + '<td>' + data.annualSalary + '</td>' + '</tr>');
+    + '<td>$' + data.annualSalary + '</td>' + '</tr>');
     $('#employeeData').append($data);
 
-    // $data.append('<h3>Total Monthly Expenditure: ' + data.annualSalary + '</h3>');
+    var $button = $('<button>Remove</button>');
+    $button.data('salary', data.annualSalary);
+
+    // wrap in a td for styling
+    var $td = $('<td></td>');
+    $td.append($button);
+
+    $data.append($td);
 
   }
 
+  function removeEmployee() {
+    var $button = $(this);
+    console.log('Button: ', $button);
+
+    //console.log tests are our friends; write small chunks, test, repeat
+
+    console.log('Button data:', $button.data('salary'));
+
+    var salary = $button.data('salary');
+    var monthly = salary / 12;
+
+    totalMonthlySalary = totalMonthlySalary - monthly;
+
+    // the button is wrapped in a table data element,
+    // which is within a table row, the row is what we want to remove
+    $button.closest('tr').remove();
+  }
 });
