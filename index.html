@@ -44,12 +44,12 @@
             </tr>
           </thead>
             <tbody>
-              <tr>
-                <td ng-repeat="employee in basic.employees">{{ employee.firstName }} {{ basic.employee.lastName }}</td>
-                <td ng-repeat="employee in basic.employees">{{ employee.employeeID }}</td>
-                <td ng-repeat="employee in basic.employees">{{ employee.jobTitle }}</td>
-                <td ng-repeat="employee in basic.employees">{{ employee.annualSalary }}</td>
-                <td ng-repeat="employee in basic.employees" id="remove"><button type="submit" ng-click="basic.deleteEmployees()">Remove</button></td>
+              <tr ng-repeat="employee in basic.employees">
+                <td>{{ employee.firstName }} {{ employee.lastName }}</td>
+                <td>{{ employee.employeeID }}</td>
+                <td>{{ employee.jobTitle }}</td>
+                <td>{{ employee.annualSalary }}</td>
+                <td id="remove"><button type="submit" ng-click="basic.deleteEmployees()">Remove</button></td>
               </tr>
             </tbody>
         </table>
