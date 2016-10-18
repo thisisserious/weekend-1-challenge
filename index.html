@@ -12,12 +12,7 @@
   <body>
     <main ng-app="employeesFormApp">
       <section ng-controller="BasicController as basic">
-        {{ 1 - 1 }}
-        {{ basic.person.firstName }}
-        {{ basic.person.lastName }}
-        {{ basic.person.employeeID }}
-        {{ basic.person.jobTitle }}
-        {{ basic.person.annualSalary }}
+
         <form id="employeeInfo">
           <label for="firstName" class="labels">First Name:</label>
           <input type="text" id="firstName" ng-model="basic.employee.firstName" />
@@ -36,24 +31,31 @@
 
           <button type="submit" ng-click="basic.createEmployees()">Submit</button>
         </form>
+
+        <h2>Employees</h2>
+        <table id="employeeData">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Employee ID</th>
+              <th>Job Title</th>
+              <th>Annual Salary</th>
+              <th id="remove">Remove</th>
+            </tr>
+          </thead>
+            <tbody>
+              <tr>
+                <td ng-repeat="employee in basic.employees">{{ employee.firstName }} {{ basic.employee.lastName }}</td>
+                <td ng-repeat="employee in basic.employees">{{ employee.employeeID }}</td>
+                <td ng-repeat="employee in basic.employees">{{ employee.jobTitle }}</td>
+                <td ng-repeat="employee in basic.employees">{{ employee.annualSalary }}</td>
+                <td ng-repeat="employee in basic.employees" id="remove"><button type="submit" ng-click="basic.deleteEmployees()">Remove</button></td>
+              </tr>
+            </tbody>
+        </table>
+
+        <p>Total Monthly Expenditures: $<span id="monthlySalary">0</span></p>
       </section>
-
     </main>
-
-      <h2>Employees</h2>
-      <table id="employeeData">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Employee ID</th>
-            <th>Job Title</th>
-            <th>Annual Salary</th>
-            <th id="remove">Remove</th>
-          </tr>
-        </thead>
-          <tbody></tbody>
-      </table>
-
-      <p>Total Monthly Expenditures: $<span id="monthlySalary">0</span></p>
   </body>
 </html>
