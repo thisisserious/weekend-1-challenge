@@ -11,15 +11,17 @@ app.controller('BasicController', function () {
   _this.createEmployees = function () {
     console.log('Submitted employees ', _this.employee);
     _this.employees.push(angular.copy(_this.employee));
-
-    _this.employees.forEach(salaryFunction);
-
-    function salaryFunction(employee) {
-      var annualSalary = employee.annualSalary;
-      console.log('salaryFunction annualSalary:', annualSalary);
-      _this.annualSalary += annualSalary;
-    }
+    _this.employees.salaryFunction();
   };
+
+  function salaryFunction() {
+    _this.annualSalary = 0;
+    _this.employees.forEach(object);
+    var annualSalary = object.annualSalary;
+    console.log('salaryFunction annualSalary:', annualSalary);
+    _this.annualSalary += annualSalary;
+    console.log('_this.annualSalary:', _this.annualSalary);
+  }
 
   _this.deleteEmployees = function () {
     console.log('Delete button clicked');
